@@ -7,10 +7,10 @@
     </ul>
     <ul>
       <li>
-        <a href="/" :class="{ active: currentPage === '/' }">Tools</a>
+        <router-link to="/">Tools</router-link>
       </li>
       <li>
-        <a href="/about" :class="{ active: currentPage === '/about' }">About</a>
+        <router-link to="/about">About</router-link>
       </li>
     </ul>
   </nav>
@@ -24,7 +24,7 @@ const currentPage = ref(window.location.pathname);
 
 <style scoped>
 /* Styles for active links */
-.active {
+.router-link-active {
   color: white;
 }
 </style>
