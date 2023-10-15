@@ -2,7 +2,7 @@
 import PocketBase from "pocketbase";
 import { ref } from "vue";
 
-const pb = new PocketBase("http://pocketbase.aehm.cloud");
+const pb = new PocketBase("https://pocketbase.aehm.cloud");
 const tools = ref();
 
 pb.collection("tools")
