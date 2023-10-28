@@ -1,5 +1,5 @@
 <template>
-  <article>
+  <article class="widget">
     <h1 class="data">{{ data }}</h1>
     <h3 class="label">{{ label }}</h3>
   </article>
@@ -20,6 +20,9 @@ article {
   }
   h3 {
     margin: 0;
+    font-weight: lighter;
+    font-style: italic;
+    opacity: 0.5;
   }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <article>
+  <article class="widget">
     <h3>Recently Visited:</h3>
     <router-link
       v-for="(page, index) in recentlyVisited"

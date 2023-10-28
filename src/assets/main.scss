@@ -110,7 +110,12 @@ blockquote {
     grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
   }
   grid-gap: $spacing;
-
+  .widget {
+    cursor: pointer;
+  }
+  .widget:hover {
+    background-color: $bg-lighter;
+  }
   .widget-small {
     grid-column: span 1;
     grid-row: span 1;

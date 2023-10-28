@@ -8,6 +8,7 @@ const router = createRouter({
       path: "/",
       name: "projects",
       component: HomeView,
+      alias: "/projects",
     },
     {
       path: "/about",
