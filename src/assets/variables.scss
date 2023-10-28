@@ -1,0 +1,25 @@
+$primary: #8b0f8c;
+$secondary: #a8765d;
+$neutral: #ddccad;
+$bg: #191421;
+$bg-light: #372a48;
+$bg-lighter: #433358;
+
+//Element Spesific Colors
+$link: $secondary;
+$link-active: $primary;
+
+$h1: 2rem;
+$h2: 1.5rem;
+$h3: 1.25rem;
+$h4: 1rem;
+
+$border-radius: 5px;
+$box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+$spacing: 1rem;
+
+//breakpoints
+$x-small: 435px;
+$small: 768px;
+$medium: 992px;
+$large: 1200px;

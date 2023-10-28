@@ -1,29 +1,39 @@
 <template>
   <div class="dashboard">
-    <div
-      v-for="(widget, index) in widgets"
-      :key="widget.id"
-      draggable="true"
-      @dragstart="dragStart(index)"
-      @dragover.prevent
-      @drop="drop(index)">
-      <DataWidget :label="widget.label" :data="widget.data"></DataWidget>
-    </div>
+    <template v-for="(widget, index) in widgets" :key="widget.id">
+      <DataWidget
+        v-if="widget.type == 'numerical'"
+        class="widget-small"
+        draggable="true"
+        @dragstart="dragStart(index)"
+        @dragover.prevent
+        @drop="drop(index)"
+        :label="widget.label"
+        :data="widget.data" />
+      <RecentlyVisitedWidget
+        v-else-if="widget.type == 'recent-pages'"
+        class="widget-large"
+        draggable="true"
+        @dragstart="dragStart(index)"
+        @dragover.prevent
+        @drop="drop(index)" />
+    </template>
   </div>
 </template>
 
 <script setup lang="ts">
 import PocketBase from "pocketbase";
-import { ref } from "vue";
-import type { Ref } from "vue";
+import { ref, onMounted } from "vue";
 import useDraggable from "../composables/useDraggable";
-import DataWidget from "../components/DataWidget.vue";
+import DataWidget from "../components/Widgets/Numerical.vue";
+import RecentlyVisitedWidget from "../components/Widgets/RecentlyVisited.vue";
 
 interface Widget {
   id: string;
   positionId: string;
   label: string;
   data: number;
+  type: string;
 }
 const { items: widgets, dragStart, drop } = useDraggable<Widget>();
 
@@ -42,6 +52,7 @@ pb.collection("test_widget_positions")
       positionId: item.id,
       label: item.expand?.widget.label,
       data: item.expand?.widget.data,
+      type: item.expand?.widget.type,
     }));
   });
 
@@ -62,14 +73,12 @@ watch(
 );
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import "@/assets/variables.scss";
 .dashboard {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.dashboard > * {
-  flex-grow: 1;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  @media screen and (max-width: $x-small) {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

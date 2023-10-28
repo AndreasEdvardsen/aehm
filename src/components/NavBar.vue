@@ -1,18 +1,11 @@
 <template>
   <nav>
-    <ul>
-      <li>
-        <strong>AEhm... Hello! &#x1F431;</strong>
-      </li>
-    </ul>
-    <ul>
-      <li>
-        <router-link to="/">Tools</router-link>
-      </li>
-      <li>
-        <router-link to="/about">About</router-link>
-      </li>
-    </ul>
+    <h2>AEhm... Hello! &#x1F431;</h2>
+    <div class="links">
+      <router-link to="/">My Projects</router-link>
+      <router-link to="/about">About</router-link>
+      <router-link to="/tools">Tools I Use</router-link>
+    </div>
   </nav>
 </template>
 
@@ -24,7 +17,4 @@ const currentPage = ref(window.location.pathname);
 
 <style scoped>
 /* Styles for active links */
-.router-link-active {
-  color: white;
-}
 </style>

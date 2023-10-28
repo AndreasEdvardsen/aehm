@@ -1,0 +1,126 @@
+@import "./variables.scss";
+//resets
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: $bg;
+  color: $neutral;
+  color: $neutral;
+  font-family: "Roboto", sans-serif;
+  padding: $spacing;
+  @media screen and (max-width: 500px) {
+    padding: 0rem;
+  }
+  h1 {
+    font-size: $h1;
+  }
+  h2 {
+    font-size: $h2;
+  }
+  h3 {
+    font-size: $h3;
+  }
+  h4 {
+    font-size: $h4;
+  }
+  button {
+    background-color: $primary;
+    border: none;
+    border-radius: 5px;
+    color: $neutral;
+    cursor: pointer;
+    font-size: $h4;
+    font-weight: bold;
+    padding: 0.5rem $spacing;
+    &:hover {
+      background-color: $secondary;
+    }
+  }
+  article {
+    background-color: $bg-light;
+    border-radius: $border-radius;
+    display: flex;
+    flex-direction: column;
+    box-shadow: $box-shadow;
+    header {
+      background-color: $bg-lighter;
+      border-radius: $border-radius $border-radius 0 0;
+      padding: $spacing;
+      img {
+        height: auto;
+        width: 100%;
+        margin-top: $spacing;
+      }
+    }
+    main {
+      padding: $spacing;
+      p {
+        margin-top: $spacing;
+        margin-bottom: $spacing;
+      }
+    }
+  }
+  nav {
+    display: flex;
+    margin-bottom: $spacing;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    .links {
+      a {
+        margin-left: $spacing;
+      }
+    }
+  }
+}
+a {
+  color: $link;
+  font-size: $h4;
+  font-weight: bold;
+  text-decoration: none;
+  &:hover {
+    color: $link-active;
+  }
+  &.router-link-active {
+    color: $link-active;
+  }
+}
+
+blockquote {
+  background-color: $bg-light;
+  border-left: 10px solid $primary;
+  border-radius: $border-radius;
+  padding: $spacing;
+  p {
+    margin-bottom: $spacing;
+  }
+  footer {
+    padding: $spacing;
+    font-weight: bold;
+  }
+}
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  @media screen and (max-width: $x-small) {
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  }
+  grid-gap: $spacing;
+
+  .widget-small {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+  .widget-large {
+    grid-column: span 2;
+    grid-row: span 2;
+    @media screen and (max-width: $x-small) {
+      grid-column: span 1;
+      grid-row: span 1;
+    }
+  }
+}

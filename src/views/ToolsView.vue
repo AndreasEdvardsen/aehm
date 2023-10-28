@@ -1,7 +1,24 @@
+<template>
+  <div class="dashboard">
+    <div v-for="tool in tools">
+      <Card>
+        <template #header>
+          <h2>{{ tool.name }}</h2>
+          <img :src="getImageUrl(tool)" />
+        </template>
+        <template #content>
+          <p>{{ tool.description }}</p>
+          <a :href="tool.url"><button class="outline">Go To</button></a>
+        </template>
+      </Card>
+    </div>
+  </div>
+</template>
+
 <script setup lang="ts">
 import PocketBase from "pocketbase";
 import { ref } from "vue";
-import ToolCard from "../components/ToolCard.vue";
+import Card from "../components/Card.vue";
 
 const pb = new PocketBase("https://pocketbase.aehm.cloud");
 const tools = ref();
@@ -20,13 +37,5 @@ function getImageUrl(tool: any) {
   return url;
 }
 </script>
-
-<template>
-  <div class="row">
-    <div v-for="tool in tools" class="col-md-4">
-      <ToolCard :image="getImageUrl(tool)" :tool="tool" />
-    </div>
-  </div>
-</template>
 
 <style scoped></style>
