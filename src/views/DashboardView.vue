@@ -1,22 +1,18 @@
 <template>
-  <div class="dashboard">
-    <template v-for="(widget, index) in widgets" :key="widget.id">
+  <div class="dashboard drop-zone">
+    <template v-for="(widget, index) in widgets">
       <DataWidget
         v-if="widget.type == 'numerical'"
         class="widget-small"
-        draggable="true"
-        @dragstart="dragStart(index)"
-        @dragover.prevent
-        @drop="drop(index)"
         :label="widget.label"
-        :data="widget.data" />
+        :data="widget.data"
+        @dragover.prevent
+        v-drag-and-drop="{ items: widgets, item: widget }" />
       <RecentlyVisitedWidget
         v-else-if="widget.type == 'recent-pages'"
         class="widget-large"
-        draggable="true"
-        @dragstart="dragStart(index)"
         @dragover.prevent
-        @drop="drop(index)" />
+        v-drag-and-drop="{ items: widgets, item: widget }" />
     </template>
   </div>
 </template>
@@ -24,7 +20,6 @@
 <script setup lang="ts">
 import PocketBase from "pocketbase";
 import { ref, onMounted } from "vue";
-import useDraggable from "../composables/useDraggable";
 import DataWidget from "../components/Widgets/Numerical.vue";
 import RecentlyVisitedWidget from "../components/Widgets/RecentlyVisited.vue";
 
@@ -35,9 +30,9 @@ interface Widget {
   data: number;
   type: string;
 }
-const { items: widgets, dragStart, drop } = useDraggable<Widget>();
 
 const pb = new PocketBase("https://pocketbase.aehm.cloud");
+const widgets = ref<Widget[]>([]);
 
 pb.collection("test_widget_positions")
   .getFullList({
@@ -45,8 +40,6 @@ pb.collection("test_widget_positions")
     expand: "widget",
   })
   .then(async (items) => {
-    console.log(items);
-
     widgets.value = items.map((item) => ({
       id: item.expand?.widget.id,
       positionId: item.id,
@@ -80,5 +73,12 @@ watch(
   @media screen and (max-width: $x-small) {
     grid-template-columns: 1fr;
   }
+}
+.dragging {
+  opacity: 0.3;
+}
+.dropzone {
+  box-shadow: 0 0 0 2px $primary;
+  transition: border 0.2s ease-in-out;
 }
 </style>
